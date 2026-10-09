@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Chinese Language - Unit 11: 舅舅是园丁</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+            min-height: 100vh;
+        }
+        .chinese-font {
+            font-family: 'Ma Shan Zheng', cursive, sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .vocab-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .vocab-card:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 14px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .speaker-active {
+            animation: pulse-ring 1.5s infinite;
+        }
+        .floating-next {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e8f5e9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4ade80;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-20 relative min-h-screen selection:bg-green-200 selection:text-green-900">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-green-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-emerald-200">
+                    🌱
+                </div>
+                <div>
+                    <span class="text-xs font-semibold text-emerald-700 uppercase tracking-wider block">Grade 4 Chinese Language</span>
+                    <h1 class="text-base sm:text-lg font-bold text-slate-800 leading-tight">Unit 11: 舅舅是园丁 (My Uncle is a Gardener)</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Interactive Quiz
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 pt-6 pb-12">
+
+        <!-- ================= PAGE 1: LESSON NOTES & VOCABULARY ================= -->
+        <section id="page-lesson" class="space-y-6">
+            
+            <!-- Banner & Teacher Audio Trigger -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 relative overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-emerald-300/30 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+                    <div class="space-y-2 max-w-xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                            <span>📖 Vocabulary Notes (新词语)</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">
+                            Learn Gardening Vocabulary!
+                        </h2>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Master the <b>Pinyin</b> pronunciation and meanings in <b>English & Malay</b> for these gardening words. Click the audio button below to listen to your male teacher's narration!
+                        </p>
+                    </div>
+
+                    <!-- Listen to Teacher Button (Instant Male Narrator with Live Timer & Caching) -->
+                    <div class="flex flex-col gap-2 w-full md:w-auto">
+                        <button id="btn-listen-teacher" onclick="playTeacherNarration()" class="w-full md:w-auto px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-3 group active:scale-95 relative overflow-hidden">
+                            <div id="loading-bar-fill" class="absolute left-0 top-0 bottom-0 bg-emerald-700/50 w-0 transition-all duration-200 pointer-events-none"></div>
+                            <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform relative z-10">
+                                <i id="teacher-speaker-icon" class="fa-solid fa-volume-high text-lg"></i>
+                            </div>
+                            <div class="text-left relative z-10">
+                                <span id="teacher-subtext" class="block text-xs font-medium text-emerald-100">Male Teacher (Narrator)</span>
+                                <span id="teacher-maintext" class="text-base font-bold">Listen to Teacher 🔊</span>
+                            </div>
+                        </button>
+
+                        <!-- Real-Time Loading Timer Badge for Students -->
+                        <div id="tts-timer-badge" class="hidden text-center text-xs font-bold text-emerald-800 bg-emerald-100/90 py-1.5 px-3 rounded-xl border border-emerald-300 flex items-center justify-center gap-2 shadow-sm animate-pulse">
+                            <i class="fa-solid fa-spinner fa-spin text-emerald-600"></i>
+                            <span id="tts-timer-text">Preparing audio... 0.0s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                <!-- Item 1: 拔野草 -->
+                <div class="vocab-card glass-card rounded-2xl p-5 border border-white/80 shadow-md flex flex-col justify-between relative overflow-hidden group">
+                    <div class="flex items-start justify-between">
+                        <span class="text-3xl">🌿</span>
+                        <button onclick="speakWord('拔野草')" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                            <i class="fa-solid fa-volume-low text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-emerald-600 tracking-wider">bá yě cǎo</div>
+                        <div class="text-3xl font-extrabold text-slate-800 my-1 tracking-wide">拔野草</div>
+                        <div class="text-xs font-semibold text-slate-700">English: <span class="text-emerald-700">Pulling weeds</span></div>
+                        <div class="text-xs text-slate-500 mt-0.5">Malay: Mencabut rumput liar</div>
+                    </div>
+                </div>
+
+                <!-- Item 2: 松土 -->
+                <div class="vocab-card glass-card rounded-2xl p-5 border border-white/80 shadow-md flex flex-col justify-between relative overflow-hidden group">
+                    <div class="flex items-start justify-between">
+                        <span class="text-3xl">⛏️</span>
+                        <button onclick="speakWord('松土')" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                            <i class="fa-solid fa-volume-low text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-emerald-600 tracking-wider">sōng tǔ</div>
+                        <div class="text-3xl font-extrabold text-slate-800 my-1 tracking-wide">松土</div>
+                        <div class="text-xs font-semibold text-slate-700">English: <span class="text-emerald-700">Loosening soil</span></div>
+                        <div class="text-xs text-slate-500 mt-0.5">Malay: Menggemburkan tanah</div>
+                    </div>
+                </div>
+
+                <!-- Item 3: 种花 -->
+                <div class="vocab-card glass-card rounded-2xl p-5 border border-white/80 shadow-md flex flex-col justify-between relative overflow-hidden group">
+                    <div class="flex items-start justify-between">
+                        <span class="text-3xl">🌸</span>
+                        <button onclick="speakWord('种花')" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                            <i class="fa-solid fa-volume-low text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-emerald-600 tracking-wider">zhòng huā</div>
+                        <div class="text-3xl font-extrabold text-slate-800 my-1 tracking-wide">种花</div>
+                        <div class="text-xs font-semibold text-slate-700">English: <span class="text-emerald-700">Planting flowers</span></div>
+                        <div class="text-xs text-slate-500 mt-0.5">Malay: Menanam bunga</div>
+                    </div>
+                </div>
+
+                <!-- Item 4: 浇水 -->
+                <div class="vocab-card glass-card rounded-2xl p-5 border border-white/80 shadow-md flex flex-col justify-between relative overflow-hidden group">
+                    <div class="flex items-start justify-between">
+                        <span class="text-3xl">🚿</span>
+                        <button onclick="speakWord('浇水')" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                            <i class="fa-solid fa-volume-low text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-emerald-600 tracking-wider">jiāo shuǐ</div>
+                        <div class="text-3xl font-extrabold text-slate-800 my-1 tracking-wide">浇水</div>
+                        <div class="text-xs font-semibold text-slate-700">English: <span class="text-emerald-700">Watering plants</span></div>
+                        <div class="text-xs text-slate-500 mt-0.5">Malay: Menyiram air</div>
+                    </div>
+                </div>
+
+                <!-- Item 5: 施肥 -->
+                <div class="vocab-card glass-card rounded-2xl p-5 border border-white/80 shadow-md flex flex-col justify-between relative overflow-hidden group sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-start justify-between">
+                        <span class="text-3xl">🧪</span>
+                        <button onclick="speakWord('施肥')" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                            <i class="fa-solid fa-volume-low text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-emerald-600 tracking-wider">shī féi</div>
+                        <div class="text-3xl font-extrabold text-slate-800 my-1 tracking-wide">施肥</div>
+                        <div class="text-xs font-semibold text-slate-700">English: <span class="text-emerald-700">Applying fertilizer</span></div>
+                        <div class="text-xs text-slate-500 mt-0.5">Malay: Membaja tanaman</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Example Sentence Box -->
+            <div class="glass-card rounded-2xl p-5 border border-emerald-200 bg-emerald-50/60 flex items-start gap-4">
+                <div class="text-2xl pt-1">👨‍🌾</div>
+                <div class="space-y-1">
+                    <h4 class="text-sm font-bold text-emerald-900">Example Sentence (例句):</h4>
+                    <p class="text-sm text-slate-700">
+                        <b>舅舅是园丁</b>，他每天在花园里<b>拔野草</b>、<b>松土</b>、<b>种花</b>、<b>浇水</b>和<b>施肥</b>。
+                    </p>
+                    <p class="text-xs text-slate-500 italic">
+                        (Uncle is a gardener. Every day he pulls weeds, loosens soil, plants flowers, waters plants, and applies fertilizer in the garden.)
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-16"></div>
+
+            <!-- Floating Next Button -->
+            <div class="fixed bottom-6 right-6 z-50">
+                <button onclick="goToPlayerSetup()" class="floating-next px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/40 flex items-center gap-3 transition-transform active:scale-95 border-2 border-white">
+                    <span>Start Quiz Challenge 🚀</span>
+                    <i class="fa-solid fa-arrow-right text-base"></i>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 2: PLAYER SETUP ================= -->
+        <section id="page-registration" class="hidden space-y-6">
+            <div class="max-w-md mx-auto glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/80 text-center">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 text-3xl flex items-center justify-center mx-auto mb-4">
+                    🧑‍🎓
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">Student Registration</h2>
+                <p class="text-xs text-slate-500 mt-1 mb-6">Please enter your name before starting the Chinese character quiz challenge.</p>
+
+                <form onsubmit="handleStartGame(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Student Name:</label>
+                        <input type="text" id="player-name-input" required placeholder="Example: Adam / Mei Ling" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-semibold text-slate-800">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Select Avatar Character:</label>
+                        <div class="grid grid-cols-4 gap-2" id="avatar-selector">
+                            <button type="button" onclick="selectAvatar('👨‍🌾')" class="avatar-btn p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-2xl text-center">👨‍🌾</button>
+                            <button type="button" onclick="selectAvatar('👩‍🌾')" class="avatar-btn p-3 rounded-xl border-2 border-transparent bg-slate-100 text-2xl text-center">👩‍🌾</button>
+                            <button type="button" onclick="selectAvatar('👦')" class="avatar-btn p-3 rounded-xl border-2 border-transparent bg-slate-100 text-2xl text-center">👦</button>
+                            <button type="button" onclick="selectAvatar('👧')" class="avatar-btn p-3 rounded-xl border-2 border-transparent bg-slate-100 text-2xl text-center">👧</button>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex items-center gap-3">
+                        <button type="button" onclick="goToLesson()" class="w-1/3 py-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm">
+                            Back
+                        </button>
+                        <button type="submit" class="w-2/3 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md shadow-emerald-500/30">
+                            Start Quiz! 🚀
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: INTERACTIVE QUIZ GAME ================= -->
+        <section id="page-game" class="hidden space-y-6">
+            <!-- Game Top Status -->
+            <div class="glass-card rounded-2xl p-4 border border-white/80 shadow-md flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="current-player-avatar" class="text-3xl">👨‍🌾</span>
+                    <div>
+                        <div id="current-player-display" class="text-sm font-bold text-slate-800">Student Name</div>
+                        <div class="text-xs text-slate-500">Question <span id="game-q-num">1</span> of 5</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-xs text-slate-500">Timer ⚡</div>
+                        <div id="game-timer-display" class="text-xl font-extrabold text-amber-600">0.0s</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-slate-500">Score</div>
+                        <div id="game-score-display" class="text-xl font-extrabold text-emerald-600">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 text-center relative">
+                <div class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-3">
+                    Select the matching Chinese character
+                </div>
+
+                <div id="question-meaning" class="text-2xl sm:text-3xl font-extrabold text-slate-800 my-4">
+                    "Watering plants / Menyiram air"
+                </div>
+
+                <div class="text-xs text-slate-500 mb-6">Choose the correct Chinese character for the meaning above:</div>
+
+                <div id="quiz-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                    <!-- Dynamic Choices -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: RESULTS & LIVE GOOGLE SHEET LEADERBOARD ================= -->
+        <section id="page-results" class="hidden space-y-6">
+            
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 text-center max-w-xl mx-auto">
+                <div class="text-5xl mb-2">🎉</div>
+                <h2 class="text-2xl font-extrabold text-slate-800">Congratulations, <span id="res-player-name">Student</span>!</h2>
+                <p class="text-xs text-slate-500 mt-1">You completed Unit 11 Quiz 舅舅是园丁.</p>
+
+                <div class="my-6 flex justify-center items-center gap-4">
+                    <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 px-6">
+                        <div class="text-xs text-emerald-700 font-bold uppercase">Final Score</div>
+                        <div class="text-3xl font-extrabold text-emerald-600 mt-1"><span id="res-score">100</span> / 100</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 px-6">
+                        <div class="text-xs text-amber-700 font-bold uppercase">Time Taken ⚡</div>
+                        <div class="text-3xl font-extrabold text-amber-600 mt-1"><span id="res-time">0.0</span>s</div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-3">
+                    <button onclick="goToLesson()" class="px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs">
+                        <i class="fa-solid fa-book-open mr-1"></i> Read Notes Again
+                    </button>
+                    <button onclick="goToPlayerSetup()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-600/30">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Play Again
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Leaderboard Section -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                            🏆
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Live Leaderboard</h3>
+                            <p id="leaderboard-subtitle" class="text-xs text-slate-500">Real-time ranking sorted by Highest Score & Speed ⚡</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <button onclick="fetchGoogleSheetLeaderboard()" title="Refresh Standings" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-colors">
+                            <i id="refresh-icon" class="fa-solid fa-rotate"></i>
+                        </button>
+                        <span id="live-indicator" class="flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Live Sheet
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Leaderboard Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-400 uppercase">
+                                <th class="py-3 px-3">Rank</th>
+                                <th class="py-3 px-3">Student</th>
+                                <th class="py-3 px-3 text-right">Score</th>
+                                <th class="py-3 px-3 text-right">Time Taken ⚡</th>
+                                <th class="py-3 px-3 text-right">Date/Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-tbody" class="divide-y divide-slate-100 text-sm">
+                            <tr>
+                                <td colspan="5" class="py-6 text-center text-slate-400 text-xs">Loading Google Sheet standings...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        /* ================= VOCABULARY DATA ================= */
+        const VOCAB_LIST = [
+            { id: 1, hanzi: "拔野草", pinyin: "bá yě cǎo", en: "Pulling weeds", ms: "Mencabut rumput liar", icon: "🌿" },
+            { id: 2, hanzi: "松土", pinyin: "sōng tǔ", en: "Loosening soil", ms: "Menggemburkan tanah", icon: "⛏️" },
+            { id: 3, hanzi: "种花", pinyin: "zhòng huā", en: "Planting flowers", ms: "Menanam bunga", icon: "🌸" },
+            { id: 4, hanzi: "浇水", pinyin: "jiāo shuǐ", en: "Watering plants", ms: "Menyiram air", icon: "🚿" },
+            { id: 5, hanzi: "施肥", pinyin: "shī féi", en: "Applying fertilizer", ms: "Membaja tanaman", icon: "🧪" }
+        ];
+
+        /* Global Application State */
+        let currentPlayerName = "Student";
+        let selectedAvatar = "👨‍🌾";
+        let currentQuestionIdx = 0;
+        let gameScore = 0;
+        let gameStartTime = 0;
+        let gameTimerInterval = null;
+        let totalTimeTaken = 0;
+        let shuffledQuestions = [];
+
+        /* Audio & TTS Controls */
+        let isAudioPlaying = false;
+        let activeAudioElement = null;
+        let cachedTeacherAudioUrl = null;
+        let loadingTimerInterval = null;
+
+        /* Direct Google Sheet Web App URL */
+        const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzikr8pHZh01noMqXjViTekP63Pn_9kUe1O4Pu3ufHJyhUMHuQE8euPnejn0tiQ2J3cgA/exec';
+
+        const localLeaderboard = [
+            { name: "Ahmad", avatar: "👨‍🌾", score: 100, timeTaken: 11.2, timestamp: Date.now() - 3600000 },
+            { name: "Siti", avatar: "👩‍🌾", score: 100, timeTaken: 14.8, timestamp: Date.now() - 7200000 },
+            { name: "Chong", avatar: "👦", score: 80, timeTaken: 12.5, timestamp: Date.now() - 10800000 }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchGoogleSheetLeaderboard();
+        });
+
+        /* ================= AUDIO STOP FUNCTION ================= */
+        function stopAllAudio() {
+            if (loadingTimerInterval) {
+                clearInterval(loadingTimerInterval);
+                loadingTimerInterval = null;
+            }
+            if (gameTimerInterval) {
+                clearInterval(gameTimerInterval);
+                gameTimerInterval = null;
+            }
+            if (activeAudioElement) {
+                activeAudioElement.pause();
+                activeAudioElement.currentTime = 0;
+                activeAudioElement = null;
+            }
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            resetAudioButton();
+        }
+
+        /* ================= MALE TEACHER NARRATOR WITH CACHING & TIMER ================= */
+        async function playTeacherNarration() {
+            if (isAudioPlaying && activeAudioElement) {
+                stopAllAudio();
+                return;
+            }
+
+            stopAllAudio();
+
+            const btn = document.getElementById('btn-listen-teacher');
+            const icon = document.getElementById('teacher-speaker-icon');
+            const timerBadge = document.getElementById('tts-timer-badge');
+            const timerText = document.getElementById('tts-timer-text');
+            const loadingBar = document.getElementById('loading-bar-fill');
+            const mainText = document.getElementById('teacher-maintext');
+
+            // 1. Instant Playback from Cache
+            if (cachedTeacherAudioUrl) {
+                isAudioPlaying = true;
+                btn.classList.add('speaker-active');
+                icon.className = "fa-solid fa-pause text-lg";
+                mainText.innerText = "Playing Lesson... 🔊";
+                activeAudioElement = new Audio(cachedTeacherAudioUrl);
+                activeAudioElement.onended = () => resetAudioButton();
+                await activeAudioElement.play();
+                return;
+            }
+
+            // 2. Fetch Gemini TTS with Real-Time Timer
+            isAudioPlaying = true;
+            btn.classList.add('speaker-active');
+            icon.className = "fa-solid fa-spinner fa-spin text-lg";
+            mainText.innerText = "Loading Teacher Audio...";
+            if (timerBadge) timerBadge.classList.remove('hidden');
+
+            const startTime = Date.now();
+            if (loadingBar) loadingBar.style.width = '10%';
+
+            loadingTimerInterval = setInterval(() => {
+                const elapsedSeconds = ((Date.now() - startTime) / 1000).toFixed(1);
+                if (timerText) timerText.innerText = `🎙️ Teacher preparing audio... ${elapsedSeconds}s`;
+                if (loadingBar) {
+                    const currentPct = Math.min(85, Math.floor((parseFloat(elapsedSeconds) / 3.0) * 100));
+                    loadingBar.style.width = `${currentPct}%`;
+                }
+            }, 100);
+
+            const narrationPrompt = "Say cheerfully in a clear male teacher voice with fluent English and accurate Mandarin Chinese pronunciation: Hello students! Welcome to Grade 4 Chinese Unit 11. Let's learn five gardening words! 1, bá yě cǎo, 拔野草 - pulling weeds. 2, sōng tǔ, 松土 - loosening soil. 3, zhòng huā, 种花 - planting flowers. 4, jiāo shuǐ, 浇水 - watering plants. 5, shī féi, 施肥 - applying fertilizer. Good luck with your quiz!";
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: narrationPrompt }] }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                prebuiltVoiceConfig: { voiceName: "Puck" }
+                            }
+                        }
+                    },
+                    model: "gemini-2.5-flash-preview-tts"
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (loadingTimerInterval) {
+                    clearInterval(loadingTimerInterval);
+                    loadingTimerInterval = null;
+                }
+
+                if (audioData && mimeType) {
+                    if (loadingBar) loadingBar.style.width = '100%';
+                    const match = mimeType.match(/rate=(\d+)/);
+                    const sampleRate = match ? parseInt(match[1], 10) : 24000;
+                    const binaryString = atob(audioData);
+                    const bytes = new Uint8Array(binaryString.length);
+                    for (let i = 0; i < binaryString.length; i++) {
+                        bytes[i] = binaryString.charCodeAt(i);
+                    }
+                    const pcm16 = new Int16Array(bytes.buffer);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    cachedTeacherAudioUrl = URL.createObjectURL(wavBlob);
+
+                    if (timerBadge) timerBadge.classList.add('hidden');
+                    if (loadingBar) loadingBar.style.width = '0%';
+
+                    icon.className = "fa-solid fa-pause text-lg";
+                    mainText.innerText = "Playing Lesson... 🔊";
+
+                    activeAudioElement = new Audio(cachedTeacherAudioUrl);
+                    activeAudioElement.onended = () => resetAudioButton();
+                    await activeAudioElement.play();
+                } else {
+                    fallbackWebSpeech("Hello students! Let's learn five gardening words. Number 1, bá yě cǎo, 拔野草, pulling weeds. Number 2, sōng tǔ, 松土, loosening soil. Number 3, zhòng huā, 种花, planting flowers. Number 4, jiāo shuǐ, 浇水, watering plants. Number 5, shī féi, 施肥, applying fertilizer.");
+                }
+            } catch (err) {
+                if (loadingTimerInterval) {
+                    clearInterval(loadingTimerInterval);
+                    loadingTimerInterval = null;
+                }
+                fallbackWebSpeech("Hello students! Let's learn five gardening words. Number 1, bá yě cǎo, 拔野草, pulling weeds. Number 2, sōng tǔ, 松土, loosening soil. Number 3, zhòng huā, 种花, planting flowers. Number 4, jiāo shuǐ, 浇水, watering plants. Number 5, shī féi, 施肥, applying fertilizer.");
+            }
+        }
+
+        function fallbackWebSpeech(text) {
+            if (loadingTimerInterval) {
+                clearInterval(loadingTimerInterval);
+                loadingTimerInterval = null;
+            }
+            const timerBadge = document.getElementById('tts-timer-badge');
+            const loadingBar = document.getElementById('loading-bar-fill');
+            if (timerBadge) timerBadge.classList.add('hidden');
+            if (loadingBar) loadingBar.style.width = '0%';
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.rate = 0.95;
+                
+                const voices = window.speechSynthesis.getVoices();
+                const maleVoice = voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('alex')) || voices[0];
+                if (maleVoice) utter.voice = maleVoice;
+
+                utter.onend = () => resetAudioButton();
+                utter.onerror = () => resetAudioButton();
+
+                window.speechSynthesis.speak(utter);
+            } else {
+                resetAudioButton();
+            }
+        }
+
+        function resetAudioButton() {
+            isAudioPlaying = false;
+            if (loadingTimerInterval) {
+                clearInterval(loadingTimerInterval);
+                loadingTimerInterval = null;
+            }
+            const btn = document.getElementById('btn-listen-teacher');
+            const icon = document.getElementById('teacher-speaker-icon');
+            const timerBadge = document.getElementById('tts-timer-badge');
+            const loadingBar = document.getElementById('loading-bar-fill');
+            const mainText = document.getElementById('teacher-maintext');
+
+            if (btn) btn.classList.remove('speaker-active');
+            if (icon) icon.className = "fa-solid fa-volume-high text-lg";
+            if (timerBadge) timerBadge.classList.add('hidden');
+            if (loadingBar) loadingBar.style.width = '0%';
+            if (mainText) mainText.innerText = "Listen to Teacher 🔊";
+        }
+
+        function pcmToWav(pcmData, sampleRate) {
+            const buffer = new ArrayBuffer(44 + pcmData.length * 2);
+            const view = new DataView(buffer);
+
+            function writeString(offset, string) {
+                for (let i = 0; i < string.length; i++) {
+                    view.setUint8(offset + i, string.charCodeAt(i));
+                }
+            }
+
+            writeString(0, 'RIFF');
+            view.setUint32(4, 36 + pcmData.length * 2, true);
+            writeString(8, 'WAVE');
+            writeString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(36, 'data');
+            view.setUint32(40, pcmData.length * 2, true);
+
+            let offset = 44;
+            for (let i = 0; i < pcmData.length; i++, offset += 2) {
+                view.setInt16(offset, pcmData[i], true);
+            }
+
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        function speakWord(hanzi) {
+            stopAllAudio();
+            if ('speechSynthesis' in window) {
+                const utter = new SpeechSynthesisUtterance(hanzi);
+                utter.lang = 'zh-CN';
+                utter.rate = 0.8;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+
+        /* NAVIGATION LOGIC */
+        function goToLesson() {
+            stopAllAudio();
+            showPage('page-lesson');
+        }
+
+        function goToPlayerSetup() {
+            stopAllAudio();
+            showPage('page-registration');
+        }
+
+        function showPage(pageId) {
+            stopAllAudio();
+            ['page-lesson', 'page-registration', 'page-game', 'page-results'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(pageId);
+            if (target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectAvatar(emoji) {
+            selectedAvatar = emoji;
+            document.querySelectorAll('.avatar-btn').forEach(btn => {
+                if (btn.innerText.includes(emoji)) {
+                    btn.className = "avatar-btn p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-2xl text-center";
+                } else {
+                    btn.className = "avatar-btn p-3 rounded-xl border-2 border-transparent bg-slate-100 text-2xl text-center";
+                }
+            });
+        }
+
+        /* GAMEPLAY LOGIC */
+        function handleStartGame(e) {
+            e.preventDefault();
+            stopAllAudio();
+            const nameInput = document.getElementById('player-name-input').value.trim();
+            if (!nameInput) return;
+
+            currentPlayerName = nameInput;
+            document.getElementById('current-player-display').innerText = currentPlayerName;
+            document.getElementById('current-player-avatar').innerText = selectedAvatar;
+
+            shuffledQuestions = [...VOCAB_LIST].sort(() => Math.random() - 0.5);
+            currentQuestionIdx = 0;
+            gameScore = 0;
+            gameStartTime = Date.now();
+
+            if (gameTimerInterval) clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => {
+                const elapsedSeconds = ((Date.now() - gameStartTime) / 1000).toFixed(1);
+                const timerEl = document.getElementById('game-timer-display');
+                if (timerEl) timerEl.innerText = `${elapsedSeconds}s`;
+            }, 100);
+
+            document.getElementById('game-score-display').innerText = gameScore;
+            showPage('page-game');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = shuffledQuestions[currentQuestionIdx];
+            document.getElementById('game-q-num').innerText = currentQuestionIdx + 1;
+            document.getElementById('question-meaning').innerText = `"${q.en}" (${q.ms})`;
+
+            const options = [q];
+            const remaining = VOCAB_LIST.filter(v => v.id !== q.id).sort(() => Math.random() - 0.5);
+            options.push(remaining[0], remaining[1], remaining[2]);
+            options.sort(() => Math.random() - 0.5);
+
+            const grid = document.getElementById('quiz-options-grid');
+            grid.innerHTML = '';
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "p-5 rounded-2xl bg-white border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 text-left transition-all shadow-sm active:scale-98 flex items-center justify-between group";
+                btn.onclick = () => selectAnswer(opt.id === q.id, btn);
+
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">${opt.icon}</span>
+                        <div>
+                            <div class="text-xs font-bold text-emerald-600">${opt.pinyin}</div>
+                            <div class="text-xl font-extrabold text-slate-800">${opt.hanzi}</div>
+                        </div>
+                    </div>
+                    <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </div>
+                `;
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(isCorrect, buttonEl) {
+            const allBtns = document.querySelectorAll('#quiz-options-grid button');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                buttonEl.className = "p-5 rounded-2xl bg-emerald-500 text-white border-2 border-emerald-600 text-left transition-all shadow-md flex items-center justify-between";
+                gameScore += 20;
+                document.getElementById('game-score-display').innerText = gameScore;
+                playSynthSound(true);
+            } else {
+                buttonEl.className = "p-5 rounded-2xl bg-rose-500 text-white border-2 border-rose-600 text-left transition-all shadow-md flex items-center justify-between";
+                playSynthSound(false);
+            }
+
+            setTimeout(() => {
+                currentQuestionIdx++;
+                if (currentQuestionIdx < shuffledQuestions.length) {
+                    renderQuestion();
+                } else {
+                    finishGame();
+                }
+            }, 1000);
+        }
+
+        function finishGame() {
+            if (gameTimerInterval) {
+                clearInterval(gameTimerInterval);
+                gameTimerInterval = null;
+            }
+            totalTimeTaken = parseFloat(((Date.now() - gameStartTime) / 1000).toFixed(1));
+
+            document.getElementById('res-player-name').innerText = `${selectedAvatar} ${currentPlayerName}`;
+            document.getElementById('res-score').innerText = gameScore;
+            document.getElementById('res-time').innerText = totalTimeTaken.toFixed(1);
+            
+            showPage('page-results');
+            saveScoreToGoogleSheet(currentPlayerName, selectedAvatar, gameScore, totalTimeTaken);
+        }
+
+        function playSynthSound(isSuccess) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (isSuccess) {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else {
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.setValueAtTime(196, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch(e){}
+        }
+
+        /* ================= GOOGLE SHEETS LIVE LEADERBOARD ================= */
+        async function saveScoreToGoogleSheet(name, avatar, score, timeTaken) {
+            const entry = { name, avatar, score, timeTaken, timestamp: Date.now() };
+
+            try {
+                // Post data to Google Apps Script Web App
+                await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(entry)
+                });
+                // Fetch updated standings after saving
+                setTimeout(fetchGoogleSheetLeaderboard, 1200);
+            } catch (err) {
+                localLeaderboard.push(entry);
+                renderLeaderboardData(localLeaderboard);
+            }
+        }
+
+        async function fetchGoogleSheetLeaderboard() {
+            const refreshIcon = document.getElementById('refresh-icon');
+            if (refreshIcon) refreshIcon.classList.add('fa-spin');
+
+            try {
+                const response = await fetch(GOOGLE_SHEET_WEB_APP_URL);
+                const data = await response.json();
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    renderLeaderboardData(data);
+                } else {
+                    renderLeaderboardData(localLeaderboard);
+                }
+            } catch (err) {
+                renderLeaderboardData(localLeaderboard);
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            }
+        }
+
+        function renderLeaderboardData(data) {
+            const tbody = document.getElementById('leaderboard-tbody');
+            if (!tbody) return;
+
+            // Sorting logic:
+            // 1. Highest Score (e.g. 100 pt)
+            // 2. Lowest Time Taken (e.g. 11.2s beats 14.8s)
+            // 3. Latest Timestamp
+            const sorted = [...data].sort((a, b) => 
+                (b.score - a.score) || 
+                ((a.timeTaken || 999) - (b.timeTaken || 999)) || 
+                (b.timestamp - a.timestamp)
+            );
+
+            tbody.innerHTML = '';
+
+            sorted.slice(0, 10).forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-emerald-50/50 transition-colors";
+
+                let rankBadge = `<span class="font-bold text-slate-500">#${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="w-6 h-6 rounded-full bg-amber-400 text-amber-950 font-extrabold text-xs inline-flex items-center justify-center shadow-sm">1 👑</span>`;
+                if (index === 1) rankBadge = `<span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 font-extrabold text-xs inline-flex items-center justify-center">2</span>`;
+                if (index === 2) rankBadge = `<span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs inline-flex items-center justify-center">3</span>`;
+
+                const dateFormatted = item.timestamp ? new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Today';
+                const timeTakenDisplay = item.timeTaken ? `${Number(item.timeTaken).toFixed(1)}s` : '-';
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-3">${rankBadge}</td>
+                    <td class="py-3.5 px-3 font-semibold text-slate-800 flex items-center gap-2">
+                        <span>${item.avatar || '👨‍🌾'}</span>
+                        <span>${escapeHtml(item.name)}</span>
+                    </td>
+                    <td class="py-3.5 px-3 text-right font-extrabold text-emerald-600">${item.score} pt</td>
+                    <td class="py-3.5 px-3 text-right font-bold text-amber-600">${timeTakenDisplay}</td>
+                    <td class="py-3.5 px-3 text-right text-xs text-slate-400">${dateFormatted}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function escapeHtml(str) {
+            return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
+        }
+    </script>
+</body>
+</html>
